@@ -48,15 +48,7 @@ public class Prova {
         this.questoes = questoes;
     }
 
-//    public void adicionarQuestao(Questao questao){
-//        questoes.add(questao);
-//        questao.setProva(this);
-//    }
-//
-//    public void removerQuestao(Questao questao){
-//        questoes.remove(questao);
-//        questao.setProva(null);
-//    }
+
 
     public int calcularPontuacaoTotal(){
         int pontuacaoTotal = 0;

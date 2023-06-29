@@ -1,9 +1,17 @@
 package model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "tipoQuestao")
 public class TipoQuestao {
+
+    @Id
     private int id;
     private String descricao;
     private List<Questao> questoes;

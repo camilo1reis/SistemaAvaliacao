@@ -1,15 +1,37 @@
 package model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "questao")
 public class Questao {
+
+    @Id
+    private int id;
     private String texto;
     private int pontuacao;
     private String resposta;
 
-    //adicionar mais atributos
+    //adicionar mais atr
 
-    public Questao(String texto, int pontuacao) {
+
+    public Questao() {
+    }
+
+    public Questao(int id, String texto, int pontuacao) {
+        this.id = id;
         this.texto = texto;
         this.pontuacao = pontuacao;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTexto() {

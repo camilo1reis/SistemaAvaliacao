@@ -3,6 +3,8 @@ package model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -60,6 +62,95 @@ public class Usuario {
         this.tipoUsuario = tipoUsuario;
     }
 
+    public void salvar() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nome_da_unidade_de_persistencia");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+
+        try {
+            transaction.begin();
+            em.persist(this);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+
+    // Método para atualizar o usuário no banco de dados
+    public void atualizar() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nome_da_unidade_de_persistencia");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+
+        try {
+            transaction.begin();
+            em.merge(this);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+
+    // Método para excluir o usuário do banco de dados
+    public void excluir() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nome_da_unidade_de_persistencia");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+
+        try {
+            transaction.begin();
+            Usuario usuario = em.find(Usuario.class, this.idUsuario);
+            em.remove(usuario);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+
+    // Método para buscar um usuário pelo ID
+    public static Usuario buscarPorId(int idUsuario) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nome_da_unidade_de_persistencia");
+        EntityManager em = emf.createEntityManager();
+
+        Usuario usuario = em.find(Usuario.class, idUsuario);
+
+        em.close();
+        emf.close();
+
+        return usuario;
+    }
+
+    // Método para listar todos os usuários
+    public static List<Usuario> listarTodos() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nome_da_unidade_de_persistencia");
+        EntityManager em = emf.createEntityManager();
+
+        TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
+        List<Usuario> usuarios = query.getResultList();
+
+        em.close();
+        emf.close();
+
+        return usuarios;
+    }
     // Outros getters e setters
 
 }

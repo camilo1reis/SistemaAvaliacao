@@ -1,11 +1,15 @@
 package service;
 
 import dao.QuestaoDao;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
+//import jakarta.persistence.EntityManager;
+//import jakarta.persistence.PersistenceContext;
+//import jakarta.transaction.Transactional;
 import model.Questao;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
@@ -15,10 +19,9 @@ public class QuestaoService {
 
     private QuestaoDao questaoDAO;
 
-
-    public QuestaoService() {
-        // Inicialize o QuestaoDAO com o EntityManager
-        this.questaoDAO = new QuestaoDao();
+    @Autowired
+    public QuestaoService(QuestaoDao questaoDAO) {
+        this.questaoDAO = questaoDAO;
     }
 
     public Questao findById(int id) {
@@ -40,5 +43,4 @@ public class QuestaoService {
     public void delete(Questao questao) {
         entityManager.remove(questao);
     }
-
 }

@@ -1,9 +1,9 @@
 package model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +14,8 @@ public class TipoQuestao {
     @Id
     private int id;
     private String descricao;
+
+    @OneToMany(mappedBy = "tipoQuestao")
     private List<Questao> questoes;
 
     public TipoQuestao(int id, String descricao) {
@@ -48,26 +50,9 @@ public class TipoQuestao {
         this.questoes = questoes;
     }
 
-    // Métodos adicionais
-
-//    public void adicionarQuestao(Questao questao) {
-//        if (questao != null && !questoes.contains(questao)) {
-//            questoes.add(questao);
-//            questao.setTipoQuestao(this);
-//        }
-//    }
-//
-//    public void removerQuestao(Questao questao) {
-//        if (questao != null && questoes.contains(questao)) {
-//            questoes.remove(questao);
-//            questao.setTipoQuestao(null);
-//        }
-//    }
-
     public int obterQuantidadeQuestoes() {
         return questoes.size();
     }
-
     // Outros métodos conforme necessário
 }
 

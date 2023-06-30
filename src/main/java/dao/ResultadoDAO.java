@@ -1,16 +1,21 @@
 package dao;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
+//import jakarta.persistence.EntityManager;
+//import jakarta.persistence.PersistenceContext;
+//import jakarta.persistence.TypedQuery;
+//import jakarta.transaction.Transactional;
 import model.Resultado;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
 public class ResultadoDAO {
+    //@PersistenceContext
     @PersistenceContext
     private EntityManager entityManager;
 

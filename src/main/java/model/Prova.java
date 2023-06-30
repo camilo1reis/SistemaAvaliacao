@@ -1,16 +1,19 @@
 package model;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
+//@Table(name = "prova")
 @Table(name = "prova")
 public class Prova {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "idProva")
+    private int idProva;
+
+    @Column(name = "nome")
     private String nome;
 
     @OneToMany(mappedBy = "prova", cascade = CascadeType.ALL)
@@ -19,17 +22,19 @@ public class Prova {
     public Prova() {
     }
 
-    public Prova(String nome, List<Questao> questoes) {
+
+    public Prova(int idProva, String nome, List<Questao> questoes) {
+        this.idProva = idProva;
         this.nome = nome;
         this.questoes = questoes;
     }
 
-    public Long getId() {
-        return id;
+    public int getIdProva() {
+        return idProva;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdProva(int idProva) {
+        this.idProva = idProva;
     }
 
     public String getNome() {

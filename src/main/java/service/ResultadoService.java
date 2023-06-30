@@ -35,7 +35,6 @@ public class ResultadoService {
     public void excluirResultado(Resultado resultado) {
         resultadoDAO.excluir(resultado);
     }
-
     // Outros métodos relevantes para o serviço...
 
 }

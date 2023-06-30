@@ -1,7 +1,8 @@
 package model;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class Resultado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
@@ -21,8 +23,9 @@ public class Resultado {
     private Prova prova;
 
     private int pontuacao;
-    private LocalDate dataRealizacao;
 
+    @Column(name = "data_realizacao")
+    private LocalDate dataRealizacao;
 
     public Resultado() {
     }
@@ -94,8 +97,7 @@ public class Resultado {
         }
     }
 
-
-    public  void  Atualizar(){
+    public void atualizar() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("nome_da_unidade_de_persistencia");
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
@@ -115,52 +117,37 @@ public class Resultado {
         }
     }
 
+    public void excluir() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nome_da_unidade_de_persistencia");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
 
-        public void excluir() {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("nome_da_unidade_de_persistencia");
-            EntityManager em = emf.createEntityManager();
-            EntityTransaction transaction = em.getTransaction();
-
-            try {
-                transaction.begin();
-                Resultado resultado = em.find(Resultado.class, this.id);
-                em.remove(resultado);
-                transaction.commit();
-            } catch (Exception e) {
-                if (transaction.isActive()) {
-                    transaction.rollback();
-                }
-                e.printStackTrace();
-            } finally {
-                em.close();
-                emf.close();
+        try {
+            transaction.begin();
+            Resultado resultado = em.find(Resultado.class, this.id);
+            em.remove(resultado);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
             }
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
         }
-    public static Resultado buscarPorId(long id){
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("nome_da_unidade_de_persistencia");
-            EntityManager em = emf.createEntityManager();
-
-            Resultado resultado = em.find(Resultado.class, id);
-
-            em.close();
-            emf.close();
-
-            return resultado;
     }
 
-    public static List<Resultado> listarTodos(){
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("nome_da_unidade_de_persistencia");
-            EntityManager em = emf.createEntityManager();
+    public static Resultado buscarPorId(long id) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("sistema AvaliacaoPU");
+        EntityManager em = emf.createEntityManager();
 
-            TypedQuery<Resultado> query = em.createQuery("SELECT r FROM Resultado r", Resultado.class);
-            List<Resultado> resultados = query.getResultList();
+        Resultado resultado = em.find(Resultado.class, id);
 
-            em.close();
-            emf.close();
+        em.close();
+        emf.close();
 
-            return resultados;
+        return resultado;
     }
-
-
 }
 

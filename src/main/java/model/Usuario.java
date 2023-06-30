@@ -1,8 +1,9 @@
 package model;
 
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -63,7 +64,7 @@ public class Usuario {
     }
 
     public void salvar() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nome_da_unidade_de_persistencia");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("sistemaAvaliacaoPU");
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
 
@@ -84,7 +85,7 @@ public class Usuario {
 
     // Método para atualizar o usuário no banco de dados
     public void atualizar() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nome_da_unidade_de_persistencia");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("sistemaAvaliacaoPU");
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
 
@@ -105,7 +106,7 @@ public class Usuario {
 
     // Método para excluir o usuário do banco de dados
     public void excluir() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nome_da_unidade_de_persistencia");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("sistemaAvaliacaoPU");
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
 
@@ -127,7 +128,7 @@ public class Usuario {
 
     // Método para buscar um usuário pelo ID
     public static Usuario buscarPorId(int idUsuario) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nome_da_unidade_de_persistencia");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("sistemaAvaliacaoPU");
         EntityManager em = emf.createEntityManager();
 
         Usuario usuario = em.find(Usuario.class, idUsuario);
@@ -140,7 +141,7 @@ public class Usuario {
 
     // Método para listar todos os usuários
     public static List<Usuario> listarTodos() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nome_da_unidade_de_persistencia");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("sistemaAvaliacaoPU");
         EntityManager em = emf.createEntityManager();
 
         TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
@@ -151,7 +152,6 @@ public class Usuario {
 
         return usuarios;
     }
-    // Outros getters e setters
 
 }
 

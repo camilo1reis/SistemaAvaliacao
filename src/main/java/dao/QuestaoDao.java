@@ -1,9 +1,11 @@
 package dao;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
+//import jakarta.persistence.EntityManager;
+//import jakarta.persistence.TypedQuery;
 import model.Questao;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class QuestaoDao {

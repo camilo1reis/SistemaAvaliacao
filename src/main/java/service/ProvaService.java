@@ -3,6 +3,7 @@ package service;
 import dao.ProvaDAO;
 import model.Prova;
 import model.Questao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,11 +12,15 @@ import java.util.List;
 public class ProvaService {
     private ProvaDAO provaDAO;
 
-    public ProvaService() {
-        provaDAO = new ProvaDAO();
+    @Autowired
+    public ProvaService(ProvaDAO provaDAO) {
+        this.provaDAO = provaDAO;
     }
+
     public Prova criarProva(String nome, List<Questao> questoes) {
-        Prova prova = new Prova(nome, questoes);
+        Prova prova = new Prova();
+        prova.setNome(nome);
+        prova.setQuestoes(questoes);
         provaDAO.criar(prova);
         return prova;
     }
